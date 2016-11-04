@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using EnerBank.Model;
 
 namespace Enerbank.Console
@@ -16,22 +12,20 @@ namespace Enerbank.Console
 			//necessario leggere alcuni file contenenti i riepiloghi giornalieri dei bonifici effettuati in alcune banche, 
 			//e creare alcuni dati a partire da questi.
 
-			//Avrai come input due file CSV con formato come definito nella RFC4180, sezione 2, senza header.
-			// https://tools.ietf.org/html/rfc4180#section-2
-
 			//Il primo file CSV conterrà il dataset con le informazioni relative ad una serie di accrediti, 
 			//Il file CSV del dataset avrà N righe, puoi supporre N < 1000.
-			var accrediti = new Accrediti();
+			Accrediti accrediti = new Accrediti();
 			accrediti.Read(args.First());
 						
 			//Il secondo file CSV avrà un unico campo:
-			var filtroEstrazioni = new FiltroEstrazioni();
+			FiltroEstrazioni filtroEstrazioni = new FiltroEstrazioni();
 			//Il file CSV con le estrazioni avrà M righe, puoi supporre M < 100.
 			filtroEstrazioni.Read(args[1]);
 									
-			var report = accrediti.Report(filtroEstrazioni);
+			ReportEstrazioneAccrediti report = accrediti.Report(filtroEstrazioni);
+			string filename = report.Export();
 
-
+			System.Diagnostics.Process.Start(filename);
 		}
 	}
 }

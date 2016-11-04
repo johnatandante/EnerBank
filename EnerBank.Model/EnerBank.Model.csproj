@@ -41,8 +41,6 @@
   <ItemGroup>
     <Compile Include="Accrediti.cs" />
     <Compile Include="FiltroEstrazioni.cs" />
-    <Compile Include="Main.cs" />
-    <Compile Include="Reader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReportEstrazioneAccrediti.cs" />
   </ItemGroup>
@@ -54,6 +52,10 @@
     <ProjectReference Include="..\EnerBank.Interfaces\EnerBank.Interfaces.csproj">
       <Project>{16f314e9-65d9-4c25-a007-e875b5aa1d27}</Project>
       <Name>EnerBank.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EnerBank.IOUtils\EnerBank.IOUtils.csproj">
+      <Project>{af09e213-061a-436c-a0a6-39f05ed24cb3}</Project>
+      <Name>EnerBank.IOUtils</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

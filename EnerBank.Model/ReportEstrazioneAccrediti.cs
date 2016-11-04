@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using EnerBank.DataItem;
 using EnerBank.Interfaces;
+using EnerBank.IOUtils;
 
 namespace EnerBank.Model
 {
@@ -12,7 +13,7 @@ namespace EnerBank.Model
 		List<IResultEstrazione> Items = new List<IResultEstrazione>();
 
 		internal static IResultEstrazione GetNewItem() {
-			return Activator.CreateInstance<ResultDataItem>();
+			return Activator.CreateInstance<ResultEstrazioneDataItem>();
 		}
 
 		/// <summary>
@@ -21,9 +22,13 @@ namespace EnerBank.Model
 		/// b) la somma totale del numero di transazioni accorpate negli accrediti così identificati.
 		/// </summary>
 		internal void Evaluate(List<IAccredito> list) {
-			IResultEstrazione item = Activator.CreateInstance<ResultDataItem>();
+			IResultEstrazione item = Activator.CreateInstance<ResultEstrazioneDataItem>();
 			item.ImportoTotale = list.Sum( i => i.Importo);
 			item.TransazioniTotale = (ulong)list.Sum(i => (decimal)i.NumeroTransazioni);
+		}
+
+		public string Export() {
+			return Writer.Write(Items.ToArray());
 		}
 	}
 }
