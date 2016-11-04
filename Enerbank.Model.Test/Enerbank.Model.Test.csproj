@@ -51,9 +51,16 @@
   </Choose>
   <ItemGroup>
     <Compile Include="AccreditiTest.cs" />
+    <Compile Include="DataUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="FiltroEstrazioniTest.cs" />
     <Compile Include="ReportEstrazioneAccreditiTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EnerBank.Model\EnerBank.Model.csproj">
+      <Project>{38a0fd96-7973-471b-b7c1-94c1ce0c9f4f}</Project>
+      <Name>EnerBank.Model</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

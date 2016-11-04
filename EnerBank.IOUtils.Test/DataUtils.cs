@@ -19,5 +19,9 @@ namespace EnerBank.IOUtils.Test
 			@"com.netscape.Zathin,Christine,Grant,cgrant9@guardian.co.uk,Female,98.216.104.111"
 		};
 
+		public static string[] CsvEnerBank = new string[] {
+			@""
+		};
+
 	}
 }
