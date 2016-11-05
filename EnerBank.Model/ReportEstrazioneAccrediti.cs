@@ -7,10 +7,17 @@ using EnerBank.IOUtils;
 
 namespace EnerBank.Model
 {
-	public class ReportEstrazioneAccrediti
+	public class ReportEstrazioneAccrediti :IReportEstrazioneAccrediti
 	{
 
-		List<IResultEstrazione> Items = new List<IResultEstrazione>();
+		public const string DefaultFileName = "result.csv";
+
+		readonly List<IResultEstrazione> _Items = new List<IResultEstrazione>();
+
+		public List<IResultEstrazione> Items
+		{
+			get { return _Items; }
+		}
 
 		internal static IResultEstrazione GetNewItem() {
 			return Activator.CreateInstance<ResultEstrazioneDataItem>();
@@ -21,14 +28,16 @@ namespace EnerBank.Model
 		/// a) l'importo totale degli accrediti così identificati
 		/// b) la somma totale del numero di transazioni accorpate negli accrediti così identificati.
 		/// </summary>
-		internal void Evaluate(List<IAccredito> list) {
+		public void Evaluate(List<IAccredito> list) {
 			IResultEstrazione item = Activator.CreateInstance<ResultEstrazioneDataItem>();
 			item.ImportoTotale = list.Sum( i => i.Importo);
-			item.TransazioniTotale = (ulong)list.Sum(i => (decimal)i.NumeroTransazioni);
+			item.TransazioniTotale = list.Sum(i => i.NumeroTransazioni);
+
+			Items.Add(item);
 		}
 
-		public string Export() {
-			return Writer.Write(Items.ToArray());
+		public string Export(string fileName = DefaultFileName) {
+			return Writer.Write(Items.ToArray(), fileName);
 		}
 	}
 }

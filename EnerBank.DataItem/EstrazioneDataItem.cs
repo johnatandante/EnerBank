@@ -3,7 +3,7 @@ using EnerBank.Interfaces;
 
 namespace EnerBank.DataItem
 {
-	public class FiltroEstrazioniDataItem : IFiltroEstrazione
+	public class EstrazioneDataItem : IEstrazione
 	{
 		public DateTime Orario { get; set; }
 	}

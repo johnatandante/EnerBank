@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BC4A112A-E399-45DF-A857-A50F28239E19}</ProjectGuid>
+    <ProjectGuid>{AC0B2FE9-603E-4C81-96F3-728A34DA5152}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Enerbank.Model.Test</RootNamespace>
-    <AssemblyName>Enerbank.Model.Test</AssemblyName>
+    <RootNamespace>EnerBank.ModelTests</RootNamespace>
+    <AssemblyName>EnerBank.ModelTests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -50,19 +50,12 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="AccreditiTest.cs" />
-    <Compile Include="DataUtils.cs" />
+    <Compile Include="AccreditiTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="EstrazioniTest.cs" />
-    <Compile Include="ReportEstrazioneAccreditiTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EnerBank.Interfaces\EnerBank.Interfaces.csproj">
-      <Project>{16f314e9-65d9-4c25-a007-e875b5aa1d27}</Project>
-      <Name>EnerBank.Interfaces</Name>
-    </ProjectReference>
     <ProjectReference Include="..\EnerBank.Model\EnerBank.Model.csproj">
-      <Project>{38a0fd96-7973-471b-b7c1-94c1ce0c9f4f}</Project>
+      <Project>{38A0FD96-7973-471B-B7C1-94C1CE0C9F4F}</Project>
       <Name>EnerBank.Model</Name>
     </ProjectReference>
   </ItemGroup>

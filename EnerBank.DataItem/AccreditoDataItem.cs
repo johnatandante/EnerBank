@@ -9,7 +9,7 @@ namespace EnerBank.DataItem
 		public string Descrizione { get; set; }
 		public decimal Importo { get; set; }
 		public DateTime Orario { get; set; }
-		public ulong NumeroTransazioni { get; set; }
+		public int NumeroTransazioni { get; set; }
 		
 	}
 }

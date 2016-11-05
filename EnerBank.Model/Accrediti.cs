@@ -7,16 +7,21 @@ using EnerBank.IOUtils;
 
 namespace EnerBank.Model
 {
-	public class Accrediti
+	public class Accrediti : IAccrediti
 	{
 
-		List<IAccredito> Items = new List<IAccredito>();
+		readonly List<IAccredito> _Items = new List<IAccredito>();
+
+		public List<IAccredito> Items
+		{
+			get { return _Items; }
+		}
 
 		public void Read(string fileName) {			
 			
 			foreach (string item in Reader.Read(fileName)) {
 				IAccredito accredito =  Parse(item);
-
+				
 				// Skip if null
 				if (accredito == null)
 					continue;
@@ -52,23 +57,22 @@ namespace EnerBank.Model
 			if (DateTime.TryParse(fields[i++], out dateValue))
 				accredito.Orario = dateValue;
 
-			uint uintValue;
-			if(uint.TryParse(fields[i++], out uintValue))
+			int uintValue;
+			if(int.TryParse(fields[i++], out uintValue))
 				accredito.NumeroTransazioni = uintValue;
 
 			return accredito;
 		
 		}
 		
-
 		/// <summary>
 		/// Per ciascuna riga presente nel secondo file CSV sarà necessario recuperare dal dataset l'accredito avvenuto in 
 		/// quell'esatto istante o, qualora tale accredito manchi nel dataset, il primo accredito immediatamente 
 		/// successivo; 
 		/// </summary>
-		public ReportEstrazioneAccrediti Report(FiltroEstrazioni filtroEstrazioni) {
+		public IReportEstrazioneAccrediti Report(IEstrazioni filtroEstrazioni) {
 			ReportEstrazioneAccrediti report = new ReportEstrazioneAccrediti();
-			foreach (IFiltroEstrazione filtro in filtroEstrazioni.GetAll()) {
+			foreach (IEstrazione filtro in filtroEstrazioni.Items) {
 				report.Evaluate(GetByFiltro(filtro));
 
 			}
@@ -76,21 +80,20 @@ namespace EnerBank.Model
 			return report;
 		}
 
-		private List<IAccredito> GetByFiltro(IFiltroEstrazione filtro) {
+		private List<IAccredito> GetByFiltro(IEstrazione filtro) {
 			List<IAccredito> list = new List<IAccredito>();			
 			list.AddRange(MatchItemsByTime(GetNearestOrarioFrom(filtro.Orario)));
 
 			return list;
-
 		}
 
-		private DateTime GetNearestOrarioFrom(DateTime dateTime) {			
-			IAccredito firstAccredito = Items.FirstOrDefault( i => i.Orario >= dateTime);
+		private DateTime GetNearestOrarioFrom(DateTime orario) {			
+			IAccredito firstAccredito = Items.FirstOrDefault( i => i.Orario >= orario);
 			return firstAccredito == null ? DateTime.MaxValue : firstAccredito.Orario;
 		}
 
-		private IEnumerable<IAccredito> MatchItemsByTime(DateTime dateTime) {
-			return Items.Where(i => i.Orario == dateTime);
+		private IEnumerable<IAccredito> MatchItemsByTime(DateTime orario) {
+			return Items.Where(i => i.Orario == orario);
 		}
 
 		internal static IAccredito GetNewItem() {

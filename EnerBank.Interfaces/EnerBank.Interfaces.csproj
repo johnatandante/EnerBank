@@ -39,8 +39,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IAccrediti.cs" />
     <Compile Include="IAccredito.cs" />
-    <Compile Include="IFiltroEstrazione.cs" />
+    <Compile Include="IEstrazione.cs" />
+    <Compile Include="IEstrazioni.cs" />
+    <Compile Include="IReportEstrazioneAccrediti.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="IResultEstrazione.cs" />
   </ItemGroup>

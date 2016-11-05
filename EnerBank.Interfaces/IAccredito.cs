@@ -8,7 +8,7 @@ namespace EnerBank.Interfaces
 		string Descrizione { get; set; }
 		decimal Importo { get; set; }
 		DateTime Orario { get; set; }
-		ulong NumeroTransazioni { get; set; }
+		int NumeroTransazioni { get; set; }
 		
 	}
 }

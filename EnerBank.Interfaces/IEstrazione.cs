@@ -2,7 +2,7 @@
 
 namespace EnerBank.Interfaces
 {
-	public interface IFiltroEstrazione
+	public interface IEstrazione
 	{
 		DateTime Orario { get; set; }
 	}

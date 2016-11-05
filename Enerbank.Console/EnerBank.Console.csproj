@@ -48,6 +48,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EnerBank.Interfaces\EnerBank.Interfaces.csproj">
+      <Project>{16F314E9-65D9-4C25-A007-E875B5AA1D27}</Project>
+      <Name>EnerBank.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EnerBank.Model\EnerBank.Model.csproj">
       <Project>{38a0fd96-7973-471b-b7c1-94c1ce0c9f4f}</Project>
       <Name>EnerBank.Model</Name>

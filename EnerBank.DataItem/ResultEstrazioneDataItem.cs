@@ -6,7 +6,7 @@ namespace EnerBank.DataItem
 	public class ResultEstrazioneDataItem : IResultEstrazione
 	{
 		public decimal ImportoTotale { get; set; }
-		public ulong TransazioniTotale { get; set; }
+		public int TransazioniTotale { get; set; }
 
 		#region IExportable Members
 

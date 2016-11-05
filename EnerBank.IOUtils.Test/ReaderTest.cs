@@ -47,7 +47,7 @@ namespace EnerBank.IOUtils.Test
 
 
 		[TestCleanup]
-		public void Finalize() {
+		public void Cleanups() {
 			File.Delete(fileThatExists);
 
 		}
