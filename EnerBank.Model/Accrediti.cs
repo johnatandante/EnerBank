@@ -46,7 +46,7 @@ namespace EnerBank.Model
 		private static IAccredito Parse(string record) {
 			IAccredito accredito = Accrediti.GetNewItem();
 			string[] fields =  Reader.Tokenize(record);
-			if (fields.Length > 4)
+			if (fields.Length != 4)
 				throw new Exception("Struttura del file non compatibile con la struttura richiesta di 4 campi: " + record);
 
 			int i = 0;
