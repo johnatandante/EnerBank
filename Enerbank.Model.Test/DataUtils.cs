@@ -125,8 +125,8 @@ namespace Enerbank.Model.Test
 @"Sharon,997.82,2016-11-04T22:40Z,38 " ,
 @"Doris,976.13,2016-11-04T12:00Z,21",
 @"Timothy,755.84,2016-11-04T21:03Z,25" ,
-	@"Take 3 - 15,89.44,2016-11-04T15:00Z,4",
-@"Stephen,722.74,2016-11-04T21:40Z,85"   ,
+	@"Take 3 - 15,88.43,2016-11-04T15:00Z,3",
+		@"Take TZ,1.01,2016-11-04T15:00+00:00,1"   ,
 @"Irene,934.27,2016-11-04T14:35Z,42"  ,
 @"Lisa,781.88,2016-11-04T11:33Z,79 "     ,
 @"Albert,765.15,2016-11-04T23:49Z,80 ",
@@ -167,7 +167,7 @@ namespace Enerbank.Model.Test
 		};
 
 		internal static string[] FiltroEstrazioniSingleItem15_00Mocked= new string[] {
-			"2016-11-04T15:00:00Z",
+			"2016-11-04T15:00:00+00:00",
 		};
 
 		internal static IResultEstrazione RisultatoEstrazioneItem15_00 = new RisultatoEstrazione() { ImportoTotale = 100, TransazioniTotale = 10 }; 
