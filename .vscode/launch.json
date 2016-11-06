@@ -6,7 +6,10 @@
             "type": "mono",
             "request": "launch",
             "program": "${workspaceRoot}/EnerBank.Console/bin/Debug/netcoreapp1.0/EnerBank.Console.dll",
-            "args": [],
+            "args": [
+                "${workspaceRoot}/EnerBank.UI/Resources/accrediti.txt",
+                "${workspaceRoot}/EnerBank.UI/Resources/estrazioni.txt"
+                ],
             "cwd": "${workspaceRoot}",
             "preLaunchTask": "",
             "runtimeExecutable": null,
