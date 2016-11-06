@@ -1,0 +1,34 @@
+﻿<Window x:Class="EnerBank.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:viewmodel="clr-namespace:EnerBank.ViewModel"
+        Title="MainWindow" Height="350" Width="525">
+    <Window.Resources>
+        <viewmodel:EstrazioniViewModel x:Key="model" x:Name="model"/>
+    </Window.Resources>
+    <Grid>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Label Content="File Accrediti" />
+        <Button Grid.Row="1" Content="Carica" Width="80" HorizontalAlignment="Right" 
+                Command="{Binding Source={StaticResource model}, Path=CaricaAccreditiCommand}"/>
+        <Label Grid.Row="2" Content="File Estrazioni" />
+        <Button Grid.Row="3" Content="Carica"  Width="80" HorizontalAlignment="Right"
+                IsEnabled="{Binding Source={StaticResource model}, Path=AccreditiLoaded}"
+               Command= "{Binding Source={StaticResource model}, Path=CaricaEstrazioniCommand}"/>
+        <Label Grid.Row="4" Content="Risultati" />
+        <Button Grid.Row="5" Content="Evaluate" IsEnabled="{Binding Source={StaticResource model}, Path=EstrazioniLoaded}"
+                Command= "{Binding Source={StaticResource model}, Path=EvaluateEstrazioniCommand}"
+                Width="80" HorizontalAlignment="Right"  />
+        <ListView Grid.Row="6" ItemsSource="{Binding Source={StaticResource model}, Path=Estrazioni}" />
+        
+    </Grid>
+</Window>

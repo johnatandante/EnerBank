@@ -36,6 +36,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -53,6 +54,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DataItem\CustomResult.cs" />
+    <Compile Include="ViewModel\EstrazioniViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -94,10 +97,24 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EnerBank.Interfaces\EnerBank.Interfaces.csproj">
+      <Project>{16f314e9-65d9-4c25-a007-e875b5aa1d27}</Project>
+      <Name>EnerBank.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EnerBank.Model\EnerBank.Model.csproj">
       <Project>{38a0fd96-7973-471b-b7c1-94c1ce0c9f4f}</Project>
       <Name>EnerBank.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EnerBank.UI.MVVMLight\EnerBank.UI.MVVMLight.csproj">
+      <Project>{d188895f-6541-4ce7-953e-f0ad2a43be62}</Project>
+      <Name>EnerBank.UI.MVVMLight</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\accrediti.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\estrazioni.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

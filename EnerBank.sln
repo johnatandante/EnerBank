@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnerBank.UI", "EnerBank\EnerBank.UI.csproj", "{C8264034-6E72-4487-88B0-D70FC31730F4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnerBank.UI", "EnerBank.UI\EnerBank.UI.csproj", "{C8264034-6E72-4487-88B0-D70FC31730F4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnerBank.Console", "Enerbank.Console\EnerBank.Console.csproj", "{18F8042E-D114-4ECE-BD8C-D95253062697}"
 EndProject
@@ -18,6 +18,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnerBank.IOUtils", "EnerBank.IOUtils\EnerBank.IOUtils.csproj", "{AF09E213-061A-436C-A0A6-39F05ED24CB3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnerBank.IOUtils.Test", "EnerBank.IOUtils.Test\EnerBank.IOUtils.Test.csproj", "{8BAFF680-024B-428E-9E29-5CFEA24C3504}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnerBank.UI.MVVMLight", "EnerBank.UI.MVVMLight\EnerBank.UI.MVVMLight.csproj", "{D188895F-6541-4CE7-953E-F0AD2A43BE62}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +59,10 @@ Global
 		{8BAFF680-024B-428E-9E29-5CFEA24C3504}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8BAFF680-024B-428E-9E29-5CFEA24C3504}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8BAFF680-024B-428E-9E29-5CFEA24C3504}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D188895F-6541-4CE7-953E-F0AD2A43BE62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D188895F-6541-4CE7-953E-F0AD2A43BE62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D188895F-6541-4CE7-953E-F0AD2A43BE62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D188895F-6541-4CE7-953E-F0AD2A43BE62}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

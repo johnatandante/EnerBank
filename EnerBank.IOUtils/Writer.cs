@@ -6,7 +6,7 @@ namespace EnerBank.IOUtils
 	{
 
 		public static string Write(object[] collection, string fileName) {
-			using (StreamWriter writer = new StreamWriter(fileName)) {
+			using (var writer = new StreamWriter(System.IO.File.Create(fileName)) ){
 				writer.AutoFlush = true;
 				foreach (var item in collection)
 					writer.WriteLine(item.ToString());

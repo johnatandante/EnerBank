@@ -1,0 +1,9 @@
+{
+     "projects":[ 
+        "EnerBank.IOUtils",
+        "EnerBank.Interfaces",
+        "EnerBank.DataItem",
+        "EnerBank.Model",
+         "EnerBank.Console"
+        ]
+ }
