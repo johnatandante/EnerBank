@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnerBank.UI", "EnerBank\EnerBank.UI.csproj", "{C8264034-6E72-4487-88B0-D70FC31730F4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnerBank.UI", "EnerBank.UI\EnerBank.UI.csproj", "{C8264034-6E72-4487-88B0-D70FC31730F4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnerBank.Console", "Enerbank.Console\EnerBank.Console.csproj", "{18F8042E-D114-4ECE-BD8C-D95253062697}"
 EndProject

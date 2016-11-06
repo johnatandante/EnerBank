@@ -1,13 +1,11 @@
-﻿using System.Linq;
-using EnerBank.Interfaces;
+﻿using EnerBank.Interfaces;
 using EnerBank.Model;
 
-namespace Enerbank.Console
+namespace EnerBank.Console
 {
 	class Program
 	{
 		static void Main(string[] args) {
-
 			if (args.Length > 0)
 				System.Console.WriteLine("File accrediti: " + args[0]);
 			if (args.Length > 1)
@@ -15,6 +13,7 @@ namespace Enerbank.Console
 
 			if (args.Length < 2) {
 				System.Console.WriteLine("Previsti due file in input come parametri, forniti: " + args.Length);
+				return;
 			}
 			
 			// Il software che creerai dovrà aiutare l'utente a processare una serie di dati derivanti da alcune 			
