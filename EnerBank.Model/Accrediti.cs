@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using EnerBank.DataItem;
 using EnerBank.Interfaces;
@@ -17,8 +18,9 @@ namespace EnerBank.Model
 			get { return _Items; }
 		}
 
-		public void Read(string fileName) {			
-			
+		public void Read(string fileName) {
+			Items.Clear();
+			List<IAccredito> list = new List<IAccredito>();
 			foreach (string item in Reader.Read(fileName)) {
 				IAccredito accredito =  Parse(item);
 				
@@ -26,9 +28,10 @@ namespace EnerBank.Model
 				if (accredito == null)
 					continue;
 
-				Items.Add(accredito);
+				list.Add(accredito);
 
 			}
+			Items.AddRange( list.OrderBy(a => a.Orario));
 
 		}
 
@@ -43,14 +46,14 @@ namespace EnerBank.Model
 		private static IAccredito Parse(string record) {
 			IAccredito accredito = Accrediti.GetNewItem();
 			string[] fields =  Reader.Tokenize(record);
-			if (fields.Length > 4)
+			if (fields.Length != 4)
 				throw new Exception("Struttura del file non compatibile con la struttura richiesta di 4 campi: " + record);
 
 			int i = 0;
 			accredito.Descrizione = fields[i++];
 			
 			decimal value;
-			if (decimal.TryParse(fields[i++], out value))
+			if (decimal.TryParse(fields[i++], NumberStyles.Any, CultureInfo.InvariantCulture, out value))
 				accredito.Importo = value;
 
 			DateTime dateValue;

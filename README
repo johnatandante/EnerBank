@@ -1,0 +1,14 @@
+# Descrizione
+Questa è un'applicazione DotNet Core che prende in input due file csv
+- primo agromento nome file csv di accrediti
+- secondo argomento nome file csv di orari per le estrazione degli accrediti
+
+Come output genera un file dal nome result.csv nella directory corrente.
+
+# Installazione
+Eseguire lo script di installazione deploy.sh
+La procedura genera una directory "deploy" dentro al quale saranno riportati i compilati
+
+# Run
+Eseguire lo script EnerBank.Run con in input i nomi dei file come parametri, se presenti nella directory corrente, altrimenti il path assoluto.
+L'eseguibile sovrascrive l'eventuale file result.csv presente nella directory corrente

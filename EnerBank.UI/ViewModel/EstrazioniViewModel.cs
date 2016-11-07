@@ -30,9 +30,9 @@ namespace EnerBank.ViewModel
 		bool _EstrazioniLoaded;
 		public bool EstrazioniLoaded { get { return _EstrazioniLoaded; } set { Notify<bool>(value, "EstrazioniLoaded", out _EstrazioniLoaded); } }
 
-		IAccrediti accrediti;
+		IAccrediti accrediti = new Accrediti();
 
-		IEstrazioni estrazioni;
+		IEstrazioni estrazioni = new Estrazioni();
 
 		public EstrazioniViewModel() {
 
@@ -47,10 +47,7 @@ namespace EnerBank.ViewModel
 			EvaluateEstrazioniCommand = new RelayCommand(() => {
 				EvaluateEstrazioni();
 			});
-
-			_Estrazioni.Add(new CustomResult() { ImportoTotale = 100, TransazioniTotale = 3  });
-			_Estrazioni.Add(new CustomResult() { ImportoTotale = 1100, TransazioniTotale = 23 });
-			_Estrazioni.Add(new CustomResult() { ImportoTotale = 223, TransazioniTotale = 13 });
+			
 			Estrazioni = new ListCollectionView(_Estrazioni);
 
 			Estrazioni.Refresh();
@@ -60,31 +57,36 @@ namespace EnerBank.ViewModel
 			_Estrazioni.Clear();
 			IReportEstrazioneAccrediti result = accrediti.Report(estrazioni);
 
-			foreach(IResultEstrazione estrazione in result.Items)
+			foreach (IResultEstrazione estrazione in result.Items)
 				_Estrazioni.Add(new CustomResult() { ImportoTotale = estrazione.ImportoTotale, TransazioniTotale = estrazione.TransazioniTotale });
 			Estrazioni.Refresh();
 		}
 
 		private void CaricaAccrediti() {
-			accrediti = new Accrediti();
+			try {
 
-			OpenFileDialog dialog = new OpenFileDialog();
-			if (dialog.ShowDialog() == DialogResult.OK) {
-				accrediti.Read(dialog.FileName);
+				OpenFileDialog dialog = new OpenFileDialog();
+				if (dialog.ShowDialog() == DialogResult.OK) {
+					accrediti.Read(dialog.FileName);
 
-				AccreditiLoaded = accrediti.Items.Any();
+					AccreditiLoaded = accrediti.Items.Any();
+				}
+			} catch (Exception e) {
+				MessageBox.Show("Errore nel caricamento del file accrediti:\n" + e.Message);
 			}
-			
+
 		}
 
 		private void CaricaEstrazioni() {
-			estrazioni = new Estrazioni();
+			try {
+				OpenFileDialog dialog = new OpenFileDialog();
+				if (dialog.ShowDialog() == DialogResult.OK) {
+					estrazioni.Read(dialog.FileName);
 
-			OpenFileDialog dialog = new OpenFileDialog();
-			if (dialog.ShowDialog() == DialogResult.OK) {
-				estrazioni.Read(dialog.FileName);
-
-				EstrazioniLoaded = estrazioni.Items.Any();
+					EstrazioniLoaded = estrazioni.Items.Any();
+				}
+			} catch (Exception e) {
+				MessageBox.Show("Errore nel caricamento del file estrazioni:\n" + e.Message);
 			}
 		}
 
