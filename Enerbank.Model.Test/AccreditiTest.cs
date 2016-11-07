@@ -3,11 +3,11 @@ using System.Linq;
 using System.IO;
 using EnerBank.Interfaces;
 using EnerBank.Model;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace Enerbank.Model.Test
 {
-	[TestClass]
+	
 	public class AccreditiTest
 	{
 
@@ -34,8 +34,7 @@ namespace Enerbank.Model.Test
 		IEstrazioni filtroWithSingleOrario12;
 		IEstrazioni filtroWithSingleOrario15;
 
-		[TestInitialize]
-		public void Initialize() {
+		public AccreditiTest() {
 			accrediti = new Accrediti();
 			csvAccreditiFileName = Path.GetTempFileName();
 			File.WriteAllText(csvAccreditiFileName, string.Join(Environment.NewLine, csvAccrediti));
@@ -57,32 +56,49 @@ namespace Enerbank.Model.Test
 			filtroWithSingleOrario15.Read(csvEstrazioniWithWithSingleItemAt15_00_FileName);
 		}
 
-		[TestMethod]
-		public void FromACsvFileName_ReadFileMustFillItemCollection() {
-			accrediti.Read(csvAccreditiFileName);
-			Assert.IsTrue(accrediti.Items.Count > 0);
+//[Theory]
+//[InlineData(-1)]
+//[InlineData(0)]
+//[InlineData(1)]
+//public void ReturnFalseGivenValuesLessThan2(int value)
+//{
+//    var result = _primeService.IsPrime(value);
+//
+//    Assert.False(result, $"{value} should not be prime");
+//}
+		~AccreditiTest() {
+			File.Delete(csvAccreditiFileName);
+			File.Delete(csvEstrazioniFileName);
+			File.Delete(csvAccreditiWith3RecordAt15_00_FileName);
+
 		}
 
-		[TestMethod]
+		[Fact]
+		public void FromACsvFileName_ReadFileMustFillItemCollection() {
+			accrediti.Read(csvAccreditiFileName);
+			Assert.True(accrediti.Items.Count > 0);
+		}
+
+		[Fact]
 		public void FromACsvFileNameAndASingleFiltroEstrazione1500_ResultMustMatchTo_1000_10() {
 			accrediti.Read(csvAccreditiWith3RecordAt15_00_FileName);
 			IReportEstrazioneAccrediti result = accrediti.Report(filtroWithSingleOrario15);
-			Assert.IsTrue(result.Items.Count.Equals(filtroWithSingleOrario15.Items.Count));
-			Assert.IsTrue(result.Items.Count.Equals(1));
-			Assert.IsTrue(result.Items.Single().ImportoTotale.Equals(risultatoEstrazione15.ImportoTotale));
-			Assert.IsTrue(result.Items.Single().TransazioniTotale.Equals(risultatoEstrazione15.TransazioniTotale));
+			Assert.True(result.Items.Count.Equals(filtroWithSingleOrario15.Items.Count));
+			Assert.True(result.Items.Count.Equals(1));
+			Assert.True(result.Items.Single().ImportoTotale.Equals(risultatoEstrazione15.ImportoTotale));
+			Assert.True(result.Items.Single().TransazioniTotale.Equals(risultatoEstrazione15.TransazioniTotale));
 		}
 
 
-		[TestMethod]
+		[Fact]
 		public void FromACsvFileNameAndAFiltroEstrazione_ResultMustBeNonEmpty() {
 			accrediti.Read(csvAccreditiFileName);
 			IReportEstrazioneAccrediti result = accrediti.Report(filtro);
-			Assert.IsTrue(filtro.Items.Count.Equals(result.Items.Count));
-			Assert.IsTrue(result.Items.Count > 0);
+			Assert.True(filtro.Items.Count.Equals(result.Items.Count));
+			Assert.True(result.Items.Count > 0);
 		}
 
-		[TestMethod]
+		[Fact]
 		public void FromAGivenAccreditiCollectionWithSingleOrarioBefore12AndACustomFilterWithOrario12_ResultMustBeEmpty() {
 			accrediti.Items.AddRange(accreditiCollectionWithSingleOrarioBefore12);
 
@@ -90,47 +106,36 @@ namespace Enerbank.Model.Test
 			filtroWithSingleOrario12.Items.Add(estrazioneWithOrario12);
 
 			IReportEstrazioneAccrediti result = accrediti.Report(filtroWithSingleOrario12);
-			Assert.IsTrue(result.Items.Count.Equals(filtroWithSingleOrario12.Items.Count));
-			Assert.IsTrue(result.Items.Count > 0);
-			Assert.IsTrue(result.Items.Count == 1);
-			Assert.IsTrue(result.Items.Single().ImportoTotale.Equals(0));
-			Assert.IsTrue(result.Items.Single().TransazioniTotale.Equals(0));
+			Assert.True(result.Items.Count.Equals(filtroWithSingleOrario12.Items.Count));
+			Assert.True(result.Items.Count > 0);
+			Assert.True(result.Items.Count == 1);
+			Assert.True(result.Items.Single().ImportoTotale.Equals(0));
+			Assert.True(result.Items.Single().TransazioniTotale.Equals(0));
 		}
 
-		[TestMethod]
+		[Fact]
 		public void FromAGivenAccreditiCollectionWithSingleOrario12AndACustomFilterWithOrario12_ResultMustNotBeEmpty() {
 			accrediti.Items.AddRange(accreditiCollectionWithSingleOrario12);
 
 			IReportEstrazioneAccrediti result = accrediti.Report(filtroWithSingleOrario12);
-			Assert.IsTrue(result.Items.Count.Equals(filtroWithSingleOrario12.Items.Count));
-			Assert.IsTrue(result.Items.Count > 0);
-			Assert.IsTrue(result.Items.Count == 1);
-			Assert.IsTrue(result.Items.Single().ImportoTotale.Equals(accreditiCollectionWithSingleOrarioBefore12.Single().Importo));
-			Assert.IsTrue(result.Items.Single().TransazioniTotale.Equals(accreditiCollectionWithSingleOrarioBefore12.Single().NumeroTransazioni));
+			Assert.True(result.Items.Count.Equals(filtroWithSingleOrario12.Items.Count));
+			Assert.True(result.Items.Count > 0);
+			Assert.True(result.Items.Count == 1);
+			Assert.True(result.Items.Single().ImportoTotale.Equals(accreditiCollectionWithSingleOrarioBefore12.Single().Importo));
+			Assert.True(result.Items.Single().TransazioniTotale.Equals(accreditiCollectionWithSingleOrarioBefore12.Single().NumeroTransazioni));
 
 		}
 
-		[TestMethod]
+		[Fact]
 		public void FromAGivenAccreditiCollectionWithSingleOrarioOver12AndACustomFilterWithOrario12_ResultMustBeNotEmpty() {
 			accrediti.Items.AddRange(accreditiCollectionWithSingleOrarioOver12);
 
 			IReportEstrazioneAccrediti result = accrediti.Report(filtroWithSingleOrario12);
-			Assert.IsTrue(result.Items.Count.Equals(filtroWithSingleOrario12.Items.Count));
-			Assert.IsTrue(result.Items.Count > 0);
-			Assert.IsTrue(result.Items.Count == 1);
-			Assert.IsTrue(result.Items.Single().ImportoTotale.Equals(accreditiCollectionWithSingleOrarioBefore12.Single().Importo));
-			Assert.IsTrue(result.Items.Single().TransazioniTotale.Equals(accreditiCollectionWithSingleOrarioBefore12.Single().NumeroTransazioni));
-		}
-
-
-
-
-		[TestCleanup]
-		public void Cleanup() {
-			File.Delete(csvAccreditiFileName);
-			File.Delete(csvEstrazioniFileName);
-			File.Delete(csvAccreditiWith3RecordAt15_00_FileName);
-
+			Assert.True(result.Items.Count.Equals(filtroWithSingleOrario12.Items.Count));
+			Assert.True(result.Items.Count > 0);
+			Assert.True(result.Items.Count == 1);
+			Assert.True(result.Items.Single().ImportoTotale.Equals(accreditiCollectionWithSingleOrarioBefore12.Single().Importo));
+			Assert.True(result.Items.Single().TransazioniTotale.Equals(accreditiCollectionWithSingleOrarioBefore12.Single().NumeroTransazioni));
 		}
 
 	}

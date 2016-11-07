@@ -1,9 +1,11 @@
 {
      "projects":[ 
         "EnerBank.IOUtils",
+         "EnerBank.IOUtils.Test",
         "EnerBank.Interfaces",
         "EnerBank.DataItem",
         "EnerBank.Model",
+         "EnerBank.Model.Test",
          "EnerBank.Console"
         ]
  }

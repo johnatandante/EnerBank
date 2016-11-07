@@ -1,15 +1,11 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.IO;
+﻿using System.IO;
+using Xunit;
 
 namespace EnerBank.IOUtils.Test
 {
 	/// <summary>
 	/// Summary description for Writer
 	/// </summary>
-	[TestClass]
 	public class WriterTest
 	{
 		static object[] nonEmptyCollection = new object[] { 1 };
@@ -20,35 +16,33 @@ namespace EnerBank.IOUtils.Test
 		static string fileNameemptyCollection = "fileNameemptyCollection.csv";
 		static string fileNamecsvCollection = "fileNamecsvCollection.csv";
 		
-		[TestMethod]
+		[Fact]
 		public void FromANonEmptyCollection_FileResultMustBeNonEmpty() {
 			string file = Writer.Write(nonEmptyCollection, fileNameNonEmptyCollection);
-			Assert.AreEqual(file, fileNameNonEmptyCollection);
-			Assert.IsTrue(File.Exists(fileNameNonEmptyCollection));
-			Assert.IsTrue(new FileInfo(fileNameNonEmptyCollection).Length > 0);
+			Assert.Equal(file, fileNameNonEmptyCollection);
+			Assert.True(File.Exists(fileNameNonEmptyCollection));
+			Assert.True(new FileInfo(fileNameNonEmptyCollection).Length > 0);
 		}
 
 		public void FromAnEmptyCollection_FileResultMustBeEmpty() {
 			string file = Writer.Write(emptyCollection, fileNameemptyCollection);
-			Assert.AreEqual(file, fileNameemptyCollection);
-			Assert.IsTrue(File.Exists(fileNameemptyCollection));
-			Assert.IsTrue(new FileInfo(fileNameemptyCollection).Length == 0);
+			Assert.Equal(file, fileNameemptyCollection);
+			Assert.True(File.Exists(fileNameemptyCollection));
+			Assert.True(new FileInfo(fileNameemptyCollection).Length == 0);
 		}
 
 		public void FromAnCsvRecordCollection_FileResultMustBeEmpty() {
 			string file = Writer.Write(csvCollection, fileNamecsvCollection);
-			Assert.AreEqual(file, fileNamecsvCollection);
-			Assert.IsTrue(File.Exists(fileNamecsvCollection));
-			Assert.IsTrue(new FileInfo(fileNamecsvCollection).Length > 0); 
+			Assert.Equal(file, fileNamecsvCollection);
+			Assert.True(File.Exists(fileNamecsvCollection));
+			Assert.True(new FileInfo(fileNamecsvCollection).Length > 0); 
 		}
 
 		#region Additional test attributes
 
-		[TestInitialize]
-		public void Initialize() { }
+		public  WriterTest() { }
 
-		[TestCleanup]
-		public void Cleanup() {
+		~WriterTest() {
 			Cleanup(fileNameNonEmptyCollection);
 			Cleanup(fileNameemptyCollection);
 			Cleanup(fileNamecsvCollection);
