@@ -43,6 +43,8 @@
     <Compile Include="Estrazioni.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReportEstrazioneAccrediti.cs" />
+    <Compile Include="Services\SessionWorker.cs" />
+    <Compile Include="Services\WorkSessionRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EnerBank.DataItem\EnerBank.DataItem.csproj">

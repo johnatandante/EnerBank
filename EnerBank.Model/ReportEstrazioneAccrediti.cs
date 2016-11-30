@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using EnerBank.DataItem;
 using EnerBank.Interfaces;
@@ -10,7 +11,7 @@ namespace EnerBank.Model
 	public class ReportEstrazioneAccrediti :IReportEstrazioneAccrediti
 	{
 
-		public const string DefaultFileName = "result.csv";
+		//public const string DefaultFileName = "result.csv";
 
 		readonly List<IResultEstrazione> _Items = new List<IResultEstrazione>();
 
@@ -36,8 +37,9 @@ namespace EnerBank.Model
 			Items.Add(item);
 		}
 
-		public string Export(string fileName = DefaultFileName) {
-			return Writer.Write(Items.ToArray(), fileName);
+		public string ExportToFile(string fileName) {
+			string fullFileName = fileName ?? Path.Combine(Path.GetTempPath(), Path.GetTempFileName());
+			return Writer.Write(Items.ToArray(), fullFileName);
 		}
 	}
 }
