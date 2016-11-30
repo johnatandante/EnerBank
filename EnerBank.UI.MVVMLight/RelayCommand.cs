@@ -20,7 +20,9 @@ namespace EnerBank.UI.MVVMLight
 		}
 
 		public void Execute(object parameter) {
-			_Action?.Invoke();
+			if(_Action != null)
+				_Action();
+
 		}
 	}
 }

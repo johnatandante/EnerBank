@@ -7,7 +7,8 @@ namespace EnerBank.UI.MVVMLight
 		public event PropertyChangedEventHandler PropertyChanged;
 
 		protected void RaisePropertyChangedEvent(string propertyName) {
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+			if (PropertyChanged != null)
+				PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 		}
 
 		protected void Notify<T>(T value, string propertyName, out T variable){

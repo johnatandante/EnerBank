@@ -1,13 +1,23 @@
-﻿using EnerBank.Interfaces;
-using EnerBank.Model;
+﻿using System.IO;
+using EnerBank.Interfaces;
+using EnerBank.Model.Services;
 
 namespace EnerBank.Console
 {
 	class Program
 	{
+		static string DefaultOutputFile = "output.csv";
+
 		static void Main(string[] args) {
+			
+			//Il primo file CSV conterrà il dataset con le informazioni relative ad una serie di accrediti, 
+			//Il file CSV del dataset avrà N righe, puoi supporre N < 1000.
+
 			if (args.Length > 0)
 				System.Console.WriteLine("File accrediti: " + args[0]);
+			
+			//Il secondo file CSV avrà un unico campo:
+			//Il file CSV con le estrazioni avrà M righe, puoi supporre M < 100.
 			if (args.Length > 1)
 				System.Console.WriteLine("File elaborazioni: " + args[1]);
 
@@ -16,26 +26,17 @@ namespace EnerBank.Console
 				return;
 			}
 			
-			// Il software che creerai dovrà aiutare l'utente a processare una serie di dati derivanti da alcune 			
-			// transazioni bancarie; in particolare, sarà
-			//necessario leggere alcuni file contenenti i riepiloghi giornalieri dei bonifici effettuati in alcune banche, 
-			//e creare alcuni dati a partire da questi.
+			// Il software dovrà aiutare l'utente a processare una serie di dati derivanti da alcune
+			// transazioni bancarie; in particolare, sarà necessario leggere alcuni file contenenti 
+			// i riepiloghi giornalieri dei bonifici effettuati in alcune banche, e creare alcuni dati 
+			// a partire da questi.
 
-			//Il primo file CSV conterrà il dataset con le informazioni relative ad una serie di accrediti, 
-			//Il file CSV del dataset avrà N righe, puoi supporre N < 1000.
-			IAccrediti accrediti = new Accrediti();
-			accrediti.Read(args[0]);
-						
-			//Il secondo file CSV avrà un unico campo:
-			IEstrazioni filtroEstrazioni = new Estrazioni();
-			//Il file CSV con le estrazioni avrà M righe, puoi supporre M < 100.
-			filtroEstrazioni.Read(args[1]);
-									
-			IReportEstrazioneAccrediti report = accrediti.Report(filtroEstrazioni);
-			string filename = report.Export(ReportEstrazioneAccrediti.DefaultFileName);
+			ISessionWorker worker = SessionWorker.GetNew(args[0], args[1]);
 
-			System.Console.WriteLine("File disponibile: " + filename);
-			//System.Diagnostics.Process.Start(filename);
+			FileInfo fileInfo = new FileInfo(worker.GetResult().ResultFileName);
+
+			System.Console.WriteLine("File disponibile: " + fileInfo.FullName);
+
 		}
 	}
 }
