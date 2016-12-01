@@ -16,8 +16,7 @@ bld/
 [Bb]in/
 [Oo]bj/
 deploy/
-wwwroot/
-EnerBank.Web/libs
+EnerBank.Web/wwwroot/lib
 
 # Roslyn cache directories
 *.ide/

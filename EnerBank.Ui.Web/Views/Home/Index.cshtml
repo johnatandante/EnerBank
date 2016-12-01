@@ -1,0 +1,19 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!--div class="panel-body" ng-app="EnerBankApp" ng-controller="mainController"-->
+<div>
+    <div class="panel-heading">
+        <nav class="collapse navbar-collapse" ng-controller="navController as navc">
+            <nav class="nav navbar-nav navbar-header h2">{{appFullName}}</nav>
+            <div class="pull-right">
+                <ul class="nav navbar-nav" ng-repeat="menu in navc.locations">
+                    <li ng-class="{ active: navc.isActive(menu.location)}"><a href="{{menu.location}}">{{menu.name}}</a></li>
+                </ul>
+            </div>
+        </nav>
+        <p class="nav navbar-nav navbar-header h4"><a href="mailto:{{mailTo}}">Author's mail: {{mailToDescription}}</a></p>
+    </div>
+    <div ng-view> </div>
+</div>
