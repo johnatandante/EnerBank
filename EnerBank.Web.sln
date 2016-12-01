@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "EnerBank.Interfaces", "..\EnerBank.Interfaces\EnerBank.Interfaces.xproj", "{04E35B82-192F-4550-9B4C-C0F3051155D5}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "EnerBank.Interfaces", "EnerBank.Interfaces\EnerBank.Interfaces.xproj", "{04E35B82-192F-4550-9B4C-C0F3051155D5}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "EnerBank.IOUtils", "..\EnerBank.IOUtils\EnerBank.IOUtils.xproj", "{762B1A8B-BF8C-44C6-8873-05291DBDF250}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "EnerBank.IOUtils", "EnerBank.IOUtils\EnerBank.IOUtils.xproj", "{762B1A8B-BF8C-44C6-8873-05291DBDF250}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "EnerBank.Model", "..\EnerBank.Model\EnerBank.Model.xproj", "{C948932B-C66C-426E-95E2-9B78CC087C3D}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "EnerBank.Model", "EnerBank.Model\EnerBank.Model.xproj", "{C948932B-C66C-426E-95E2-9B78CC087C3D}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "EnerBank.DataItem", "..\EnerBank.DataItem\EnerBank.DataItem.xproj", "{558F2859-134B-4BD0-9544-6ADA219B0AA2}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "EnerBank.DataItem", "EnerBank.DataItem\EnerBank.DataItem.xproj", "{558F2859-134B-4BD0-9544-6ADA219B0AA2}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "EnerBank.Ui.Web", "..\EnerBank.Ui.Web\EnerBank.Ui.Web.xproj", "{3F383ED4-03D7-4513-80C2-4FF1189DCC30}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "EnerBank.Ui.Web", "EnerBank.Ui.Web\EnerBank.Ui.Web.xproj", "{3F383ED4-03D7-4513-80C2-4FF1189DCC30}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
