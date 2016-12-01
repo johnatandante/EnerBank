@@ -8,6 +8,6 @@ namespace EnerBank.Interfaces
 
 		void Evaluate(List<IAccredito> list);
 
-		string Export(string fileName);
+		string ExportToFile(string fileName);
 	}
 }
