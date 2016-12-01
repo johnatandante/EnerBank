@@ -3,11 +3,12 @@
   "buildOptions": {
     "debugType": "portable"
   },
-  "dependencies": {},
+  "dependencies": {
+    "NETStandard.Library": "1.6.1"
+  },
   "frameworks": {
     "netstandard1.6": {
       "dependencies": {
-        "NETStandard.Library": "1.6.0",
         "EnerBank.Interfaces":"*",
         "EnerBank.DataItem":"*",
         "EnerBank.IOUtils":"*"

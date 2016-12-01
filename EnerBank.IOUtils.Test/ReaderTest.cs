@@ -1,9 +1,8 @@
 ﻿using System.IO;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace EnerBank.IOUtils.Test
 {
-	[TestClass]
 	public class ReaderTest
 	{
 
@@ -14,8 +13,7 @@ namespace EnerBank.IOUtils.Test
 		string csvRecordWith7Items = "ciao,ciao,ciao,mare,100,200,A";
 		string csvRecordWithDoubleQuotesWith6Items = "\"ciao,ciao\",ciao,mare,100,200,A";
 		
-		[TestInitialize]
-		public void InitTest() {
+		public ReaderTest() {
 			fileThatExists = Path.GetTempFileName();
 			File.WriteAllLines(fileThatExists, emptyFileContent);
 
@@ -23,31 +21,29 @@ namespace EnerBank.IOUtils.Test
 			
 		}
 
-		[TestMethod]
+		[Fact]
 		public void FromAGivenFileNameThatExists_ThenLinesReadMustBeGreaterThan1() {
 			
-			Assert.IsTrue(Reader.Read(fileThatExists).LongLength >= 1);
+			Assert.True(Reader.Read(fileThatExists).Length >= 1);
 
 		}
 
-		[TestMethod]
+		[Fact]
 		public void FromAGivenFileNameThatNotExists_ThenLinesReadMustBeGreaterThan1() {
 
-			Assert.IsFalse(Reader.Read(fileThatNotExists).LongLength >= 1);
+			Assert.True(Reader.Read(fileThatNotExists).Length >= 1);
 
 		}
 
-		[TestMethod]
+		[Fact]
 		public void FromAGivenCsvString_TokenizeMustReturnNonEmptyArray() {
 
-			Assert.IsTrue(Reader.Tokenize(csvRecordWith7Items).Length ==7);
-			Assert.IsTrue(Reader.Tokenize(csvRecordWithDoubleQuotesWith6Items).Length == 6);
+			Assert.True(Reader.Tokenize(csvRecordWith7Items).Length ==7);
+			Assert.True(Reader.Tokenize(csvRecordWithDoubleQuotesWith6Items).Length == 6);
 
 		}
 
-
-		[TestCleanup]
-		public void Cleanups() {
+		~ReaderTest() {
 			File.Delete(fileThatExists);
 
 		}

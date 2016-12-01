@@ -1,2 +1,0 @@
-#!/bin/bash
-dotnet ./deploy/EnerBank.Console.dll $1 $2

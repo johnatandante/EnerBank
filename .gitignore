@@ -5,6 +5,7 @@
 *.suo
 *.user
 *.sln.docstates
+project.lock.json
 
 # Build results
 [Dd]ebug/
@@ -15,6 +16,8 @@ build/
 bld/
 [Bb]in/
 [Oo]bj/
+deploy/
+EnerBank.Web/wwwroot/lib
 
 # Roslyn cache directories
 *.ide/
