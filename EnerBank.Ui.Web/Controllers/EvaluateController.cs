@@ -17,12 +17,21 @@ namespace EnerBank.Web.Controllers
 		// ref
 		// http://blog.scottlogic.com/2016/01/20/restful-api-with-aspnet50.html
 
+		const string UploadsDir = "uploads";
+
 		IWorkSessionRepository repository;
+		string uploads;
 
 		private IHostingEnvironment _environment;
 
 		public EvaluateController(IHostingEnvironment environment) {
 			_environment = environment;
+			
+			uploads  = Path.Combine(_environment.WebRootPath, UploadsDir);
+			if (!Directory.Exists(uploads)) {
+				Directory.CreateDirectory(uploads);
+			}
+
 		}
 
 		[HttpGet]
@@ -71,9 +80,9 @@ namespace EnerBank.Web.Controllers
 				FileInfo resultFileInfo = new FileInfo(result.ResultFileName);
 
 				List<string[]> content = Consume(resultFileInfo);
-				//CleanUploads(fileInfos);
+				CleanUploads(fileInfos);
 
-					return new OkObjectResult(content.ToArray());
+				return new OkObjectResult(content.ToArray());
 			} catch (HttpRequestException) {
 				return new NoContentResult();
 			}
@@ -108,27 +117,23 @@ namespace EnerBank.Web.Controllers
 			List<FileInfo> filesUploaded = new List<FileInfo>();
 
 			// Check if the request contains multipart/form-data.
-			//if (!Request.Content.IsMimeMultipartContent()) {
 			if (!HttpContext.Request.HasFormContentType) {
 				throw new HttpRequestException("Unsupported Media Type");
 			}
-
-			string uploads  = Path.Combine(_environment.WebRootPath, "uploads");
-
+			
 			try {
-				// Read the form data and return an async task.				
-
+				// Read the form data and return an async task.
 				foreach (var file in Request.Form.Files) {
 					if (file.Length <= 0)
 						continue;
 
-					string fileName = Path.Combine(uploads, file.FileName);
+					FileInfo toUpload = new FileInfo(file.FileName);
+					string fileName = Path.Combine(uploads, toUpload.Name);
 					using (Stream fileStream = new FileStream(fileName, FileMode.Create)) {
 						await file.CopyToAsync(fileStream);						
 					}
-
-					FileInfo fileInfo = new FileInfo(fileName);
-					filesUploaded.Add(fileInfo);
+					
+					filesUploaded.Add(new FileInfo(fileName));
 
 				}
 			} catch (System.Exception) {
