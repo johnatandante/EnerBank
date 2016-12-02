@@ -216,5 +216,7 @@ namespace Enerbank.Model.Test
 		{
 			get; set;
 		}
+		
+		public DateTime Data { get; set; }
 	}
 }

@@ -8,7 +8,6 @@
 //	/// <summary>
 //	/// Summary description for ReportEstrazioneAccreditiTest
 //	/// </summary>
-//	[TestClass]
 //	public class ReportEstrazioneAccreditiTest
 //	{
 //		public ReportEstrazioneAccreditiTest() {

@@ -30,8 +30,7 @@ namespace EnerBank.IOUtils.Test
 
 		[Fact]
 		public void FromAGivenFileNameThatNotExists_ThenLinesReadMustBeGreaterThan1() {
-
-			Assert.True(Reader.Read(fileThatNotExists).Length >= 1);
+			Assert.True(Reader.Read(fileThatNotExists).Length == 0);
 
 		}
 
