@@ -6,7 +6,7 @@ namespace EnerBank.Console
 {
 	class Program
 	{
-		static string DefaultOutputFile = "output.csv";
+		//static string DefaultOutputFile = "output.csv";
 
 		static void Main(string[] args) {
 			
@@ -31,9 +31,14 @@ namespace EnerBank.Console
 			// i riepiloghi giornalieri dei bonifici effettuati in alcune banche, e creare alcuni dati 
 			// a partire da questi.
 
-			ISessionWorker worker = SessionWorker.GetNew(args[0], args[1]);
+			ModelFactory environment = SessionWorker.GetNewEnvironment();
 
-			FileInfo fileInfo = new FileInfo(worker.GetResult().ResultFileName);
+			IWorkSession result = environment
+										.GetNew<ISessionWorker>(environment)
+										.Run(args[0], args[1])
+										.GetResult();
+			
+			FileInfo fileInfo = new FileInfo(result.ResultFileName);
 
 			System.Console.WriteLine("File disponibile: " + fileInfo.FullName);
 

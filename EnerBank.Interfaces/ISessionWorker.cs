@@ -5,5 +5,7 @@ namespace EnerBank.Interfaces
 	{
 		IWorkSession GetResult();
 
+		ISessionWorker Run(string sourceFileName, string filterFileName);
+
 	}
 }

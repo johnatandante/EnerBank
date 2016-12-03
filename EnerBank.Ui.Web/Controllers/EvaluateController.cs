@@ -74,8 +74,13 @@ namespace EnerBank.Web.Controllers
 
 				filter = fileInfos[1];
 
-				ISessionWorker sessionWorker = SessionWorker.GetNew(source.FullName, filter.FullName);
-				IWorkSession result = repository.InsertNew(sessionWorker.GetResult());
+				ModelFactory environment = SessionWorker.GetNewEnvironment();
+				IWorkSession sessionResult = environment
+										.GetNew<ISessionWorker>(environment)
+										.Run(source.FullName, filter.FullName)
+										.GetResult();
+				
+				IWorkSession result = repository.InsertNew(sessionResult);
 
 				FileInfo resultFileInfo = new FileInfo(result.ResultFileName);
 

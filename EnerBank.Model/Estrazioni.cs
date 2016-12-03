@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using EnerBank.DataItem;
 using EnerBank.Interfaces;
 using EnerBank.IOUtils;
+using EnerBank.Model.Services;
 
 namespace EnerBank.Model
 {
@@ -15,6 +15,13 @@ namespace EnerBank.Model
 			{
 				return _Items;
 			}
+		}
+
+		readonly ModelFactory Factory = null;
+
+		public Estrazioni(ModelFactory factory){
+			Factory = factory ?? ModelFactory.Instance;
+
 		}
 
 		public void Read(string fileName) {
@@ -36,9 +43,9 @@ namespace EnerBank.Model
 		/// Il record ha i seguenti campi
 		/// data/orario da estrarre, stesso formato di cui sopra, sempre con precisione secondi e timezone offset sempre presente
 		/// </summary>
-		private static IEstrazione Parse(string record) {
+		private IEstrazione Parse(string record) {
 
-			IEstrazione filtro = Estrazioni.GetNewItem();
+			IEstrazione filtro = Factory.GetNew<IEstrazione>();
 			string[] fields =  Reader.Tokenize(record);
 			if (fields.Length > 1)
 				throw new Exception("Struttura del file non compatibile con la struttura richiesta di 1 campo: " + record);
@@ -51,8 +58,5 @@ namespace EnerBank.Model
 			return filtro;
 		}
 
-		internal static IEstrazione GetNewItem() {
-			return Activator.CreateInstance<EstrazioneDataItem>();
-		}
 	}
 }

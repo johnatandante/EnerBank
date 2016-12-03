@@ -1,30 +1,34 @@
-﻿//using System;
-//using EnerBank.Model;
-//using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using System;
+using EnerBank.Interfaces;
+using EnerBank.Model;
+using EnerBank.Model.Services;
+using Xunit;
 
-//namespace Enerbank.Model.Test
-//{
-//	[TestClass]
-//	public class EstrazioniTest
-//	{
-//		string[] csvEstrazioni = (string[])DataUtils.FiltroEstrazioniMocked.Clone();
+namespace Enerbank.Model.Test
+{
 
-//		Estrazioni estrazioni;
+	public class EstrazioniTest
+	{
+		string[] csvEstrazioni = (string[])DataUtils.FiltroEstrazioniMocked.Clone();
 
-//		[TestInitialize]
-//		public void Initialize() {
-//			estrazioni = new Estrazioni();
+		IEstrazioni estrazioni;
+		ModelFactory environment = null;
 
-//		}
+		public EstrazioniTest() {
+			environment = ModelFactory.Instance
+							.Map<IEstrazioni, Estrazioni>();	
 
-//		[TestMethod]
-//		public void TestMethod1() {
+			estrazioni = environment.GetNew<IEstrazioni>();
+			
+		}
 
-//		}
+		[Fact]
+		public void TestMethod1() {
 
-//		[TestCleanup]
-//		public void Cleanup() {
+		}
 
-//		}
-//	}
-//}
+		~EstrazioniTest() {
+
+		}
+	}
+}

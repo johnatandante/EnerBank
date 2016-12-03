@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using EnerBank.DataItem;
 using EnerBank.Interfaces;
 using EnerBank.IOUtils;
+using EnerBank.Model.Services;
 
 namespace EnerBank.Model
 {
@@ -20,8 +20,11 @@ namespace EnerBank.Model
 			get { return _Items; }
 		}
 
-		internal static IResultEstrazione GetNewItem() {
-			return Activator.CreateInstance<ResultEstrazioneDataItem>();
+		readonly ModelFactory Factory = null;
+
+		public ReportEstrazioneAccrediti(ModelFactory factory){
+			Factory = factory ?? ModelFactory.Instance;
+
 		}
 
 		/// <summary>
@@ -30,7 +33,8 @@ namespace EnerBank.Model
 		/// b) la somma totale del numero di transazioni accorpate negli accrediti così identificati.
 		/// </summary>
 		public void Evaluate(List<IAccredito> list) {
-			IResultEstrazione item = Activator.CreateInstance<ResultEstrazioneDataItem>();
+			IResultEstrazione item = Factory.GetNew<IResultEstrazione>();
+			
 			item.Data = list.Select( i=> i.Orario).Single();
 			item.ImportoTotale = list.Sum( i => i.Importo);
 			item.TransazioniTotale = list.Sum(i => i.NumeroTransazioni);

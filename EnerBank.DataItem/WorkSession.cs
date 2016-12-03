@@ -17,16 +17,11 @@ namespace EnerBank.DataItem
 
 		#endregion
 
-		WorkSession(IAccrediti source, IEstrazioni filtro) {
+		public WorkSession(IAccrediti source, IEstrazioni filtro) {
 			this.Source = source;
 			this.Filtro = filtro;
 
 			ResultFileName = string.Empty;
-		}
-
-
-		public static IWorkSession GetNew(IAccrediti source, IEstrazioni filtro) {
-			return new WorkSession(source, filtro);
 		}
 
 	}

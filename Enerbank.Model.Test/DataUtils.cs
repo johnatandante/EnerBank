@@ -174,7 +174,7 @@ namespace Enerbank.Model.Test
 
 	}
 
-	class Estrazione : IEstrazione
+	public class Estrazione : IEstrazione
 	{
 		public DateTime Orario
 		{
@@ -182,7 +182,7 @@ namespace Enerbank.Model.Test
 		}
 	}
 
-	class Accredito : IAccredito
+	public class Accredito : IAccredito
 	{
 		public string Descrizione
 		{
@@ -205,7 +205,7 @@ namespace Enerbank.Model.Test
 		}
 	}
 
-	class RisultatoEstrazione : IResultEstrazione
+	public class RisultatoEstrazione : IResultEstrazione
 	{
 		public decimal ImportoTotale
 		{
@@ -213,6 +213,11 @@ namespace Enerbank.Model.Test
 		}
 
 		public int TransazioniTotale
+		{
+			get; set;
+		}
+		
+		public DateTime Data
 		{
 			get; set;
 		}

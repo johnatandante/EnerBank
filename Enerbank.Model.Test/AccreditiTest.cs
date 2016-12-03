@@ -3,6 +3,7 @@ using System.Linq;
 using System.IO;
 using EnerBank.Interfaces;
 using EnerBank.Model;
+using EnerBank.Model.Services;
 using Xunit;
 
 namespace Enerbank.Model.Test
@@ -34,23 +35,27 @@ namespace Enerbank.Model.Test
 		IEstrazioni filtroWithSingleOrario12;
 		IEstrazioni filtroWithSingleOrario15;
 
+		ModelFactory environment = null;
+
 		public AccreditiTest() {
-			accrediti = new Accrediti();
+			environment = SessionWorker.GetNewEnvironment();
+
+			accrediti = environment.GetNew<IAccrediti>(environment);
 			csvAccreditiFileName = Path.GetTempFileName();
 			File.WriteAllText(csvAccreditiFileName, string.Join(Environment.NewLine, csvAccrediti));
 
-			filtro = new Estrazioni();
+			filtro = environment.GetNew<IEstrazioni>();
 			csvEstrazioniFileName = Path.GetTempFileName();
 			File.WriteAllText(csvEstrazioniFileName, string.Join(Environment.NewLine, csvEstrazioni));
 			filtro.Read(csvEstrazioniFileName);
 
-			filtroWithSingleOrario12 = new Estrazioni();
+			filtroWithSingleOrario12 = environment.GetNew<IEstrazioni>();
 			filtroWithSingleOrario12.Items.Add(estrazioneWithOrario12);
 
 			csvAccreditiWith3RecordAt15_00_FileName = Path.GetTempFileName();
 			File.WriteAllText(csvAccreditiWith3RecordAt15_00_FileName, string.Join(Environment.NewLine, csvAccreditiWithImportoTotale100AndTrasazioniTotale10At15_00));
 
-			filtroWithSingleOrario15 = new Estrazioni();
+			filtroWithSingleOrario15 = environment.GetNew<IEstrazioni>();
 			csvEstrazioniWithWithSingleItemAt15_00_FileName = Path.GetTempFileName();
 			File.WriteAllText(csvEstrazioniWithWithSingleItemAt15_00_FileName, string.Join(Environment.NewLine, csvEstrazioniEstrazioniSingleItem15_00));
 			filtroWithSingleOrario15.Read(csvEstrazioniWithWithSingleItemAt15_00_FileName);
@@ -102,7 +107,7 @@ namespace Enerbank.Model.Test
 		public void FromAGivenAccreditiCollectionWithSingleOrarioBefore12AndACustomFilterWithOrario12_ResultMustBeEmpty() {
 			accrediti.Items.AddRange(accreditiCollectionWithSingleOrarioBefore12);
 
-			filtroWithSingleOrario12 = new Estrazioni();
+			filtroWithSingleOrario12 = environment.GetNew<IEstrazioni>();
 			filtroWithSingleOrario12.Items.Add(estrazioneWithOrario12);
 
 			IReportEstrazioneAccrediti result = accrediti.Report(filtroWithSingleOrario12);

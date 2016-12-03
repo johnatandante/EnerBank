@@ -6,7 +6,7 @@ namespace EnerBank.IOUtils.Test
 		/// <summary>
 		/// Thanks to https://www.mockaroo.com/ 
 		/// </summary>
-		public static string[] CsvMocked = new string[] {
+		public static string[] CsvMocked = new string [] {
 			@"org.gnu.It,Karen,Banks,kbanks0@squarespace.com,Female,31.155.137.41",
 			@"net.seesaa.Flexidy,Michael,Webb,mwebb1@desdev.cn,Male,126.131.222.219",
 			@"com.squidoo.Transcof,Bonnie,Shaw,bshaw2@google.cn,Female,26.110.29.143",

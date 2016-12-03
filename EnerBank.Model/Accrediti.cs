@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using EnerBank.DataItem;
 using EnerBank.Interfaces;
 using EnerBank.IOUtils;
+using EnerBank.Model.Services;
 
 namespace EnerBank.Model
 {
@@ -16,6 +16,15 @@ namespace EnerBank.Model
 		public List<IAccredito> Items
 		{
 			get { return _Items; }
+		}
+
+		readonly IReportEstrazioneAccrediti report = null;
+
+		readonly ModelFactory Factory = null;
+
+		public Accrediti(ModelFactory factory){
+			Factory = factory ?? ModelFactory.Instance;
+			report = Factory.GetNew<IReportEstrazioneAccrediti>(Factory);
 		}
 
 		public void Read(string fileName) {
@@ -43,8 +52,8 @@ namespace EnerBank.Model
 		/// :mm:ssTZD (esempio: 2015-11-05T08:15:30+01:00 per indicare il 5 Novembre 2015, ora italiana 8.15 e trenta secondi)
 		/// numero di transazioni accorpate in tale importo, numero intero
 		/// </summary>
-		private static IAccredito Parse(string record) {
-			IAccredito accredito = Accrediti.GetNewItem();
+		private IAccredito Parse(string record) {
+			IAccredito accredito = Factory.GetNew<IAccredito>();
 			string[] fields =  Reader.Tokenize(record);
 			if (fields.Length != 4)
 				throw new Exception("Struttura del file non compatibile con la struttura richiesta di 4 campi: " + record);
@@ -74,7 +83,6 @@ namespace EnerBank.Model
 		/// successivo; 
 		/// </summary>
 		public IReportEstrazioneAccrediti Report(IEstrazioni filtroEstrazioni) {
-			ReportEstrazioneAccrediti report = new ReportEstrazioneAccrediti();
 			foreach (IEstrazione filtro in filtroEstrazioni.Items) {
 				report.Evaluate(GetByFiltro(filtro));
 
@@ -97,10 +105,6 @@ namespace EnerBank.Model
 
 		private IEnumerable<IAccredito> MatchItemsByTime(DateTime orario) {
 			return Items.Where(i => i.Orario == orario);
-		}
-
-		internal static IAccredito GetNewItem() {
-			return Activator.CreateInstance<AccreditoDataItem>();
 		}
 
 	}
