@@ -35,8 +35,10 @@ namespace EnerBank.Model.Services {
 
         public T GetNew<T>(params object[] args) {
             string genericType = typeof(T).Name;
-            if(!_Map.ContainsKey(genericType))
+            if(!_Map.ContainsKey(genericType)){
+                Console.WriteLine("Tipo " + genericType + " non mappato");
                 throw new NotSupportedException();
+            }
             
             if(args.Length>0)
                 return (T)Activator.CreateInstance(_Map[genericType], args);

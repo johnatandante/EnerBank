@@ -1,11 +1,13 @@
 ﻿
 using System;
 using EnerBank.Interfaces;
+using EnerBank.Model.Services;
 
 namespace Enerbank.Model.Test
 {
 	class DataUtils
 	{
+
 		internal static string[] AccreditiMocked = new string[] {
 @"Janet,362.36,2016-11-04T07:40Z,20 "		 ,
 @"Anna,433.03,2016-11-04T09:29Z,84"			 ,
@@ -138,20 +140,48 @@ namespace Enerbank.Model.Test
 		static DateTime OrarioBefore12 = new DateTime(2016,11,04,11,59,59);
 		static DateTime OrarioOver12 = new DateTime(2016,11,04,12,0,1);
 		//static DateTime Orario15 = new DateTime(2016,11,04,15,0,0);
+		
+		internal static IAccredito[] AccreditiCollectionWithSingleOrarioOver12;
 
-		internal static IAccredito[] AccreditiCollectionWithSingleOrarioOver12 = new IAccredito[] {
-			new Accredito() { Descrizione = string.Empty, Importo = 1.00M, NumeroTransazioni = 1, Orario = OrarioOver12  }
-		};
+		internal static IAccredito[] AccreditiCollectionWithSingleOrario12;
 
-		internal static IAccredito[] AccreditiCollectionWithSingleOrario12= new IAccredito[] {
-			new Accredito() { Descrizione = string.Empty, Importo = 1.00M, NumeroTransazioni = 1, Orario =  Orario12  }
-		};
+		internal static IAccredito[] AccreditiCollectionWithSingleOrarioBefore12;
 
-		internal static IAccredito[] AccreditiCollectionWithSingleOrarioBefore12= new IAccredito[] {
-			new Accredito() { Descrizione = string.Empty, Importo = 1.00M, NumeroTransazioni = 1, Orario = OrarioBefore12  }
-		};
+		internal static IEstrazione EstrazioneWithOrario12;
 
-		internal static IEstrazione EstrazioneWithOrario12 = new Estrazione() { Orario = Orario12 };
+		internal static IResultEstrazione RisultatoEstrazioneItem15_00;
+
+		static DataUtils(){
+			ModelFactory evn = GetNewDataEnvironment();
+
+			AccreditiCollectionWithSingleOrarioOver12 = new IAccredito[] {
+				evn.GetNew<IAccredito>(1.00M, 1, OrarioOver12, "Orario Over 12")
+			};
+
+			AccreditiCollectionWithSingleOrario12= new IAccredito[] {
+				evn.GetNew<IAccredito>(1.00M, 1, Orario12 , "Orario 12")
+			};
+
+			AccreditiCollectionWithSingleOrarioBefore12= new IAccredito[] {
+				evn.GetNew<IAccredito>(1.00M, 1,OrarioBefore12 , "Orario Before 12")
+			};
+
+			EstrazioneWithOrario12 = evn.GetNew<IEstrazione>(Orario12);
+			
+			RisultatoEstrazioneItem15_00 = evn.GetNew<IResultEstrazione>(100.00M, 10); 
+
+		}
+
+		private static ModelFactory Init(ModelFactory env) {
+			return env.Map<IAccredito, Accredito>()
+				.Map<IEstrazione, Estrazione>()
+				.Map<IResultEstrazione, RisultatoEstrazione>();
+			
+		}
+
+		internal static ModelFactory GetNewDataEnvironment(){
+			return Init((ModelFactory)Activator.CreateInstance(typeof(ModelFactory)));
+		}
 
 		internal static string[] FiltroEstrazioniMocked = new string[] {
 			"2016-11-04T03:15:00Z",
@@ -166,16 +196,22 @@ namespace Enerbank.Model.Test
 			"2016-11-04T15:36:00Z",
 		};
 
-		internal static string[] FiltroEstrazioniSingleItem15_00Mocked= new string[] {
-			"2016-11-04T15:00:00+00:00",
-		};
+		static string ThreeOClockPM = "2016-11-04T15:00:00+00:00";
 
-		internal static IResultEstrazione RisultatoEstrazioneItem15_00 = new RisultatoEstrazione() { ImportoTotale = 100, TransazioniTotale = 10 }; 
+		internal static string[] FiltroEstrazioniSingleItem15_00Mocked= new string[] {
+			ThreeOClockPM,
+		};
 
 	}
 
 	public class Estrazione : IEstrazione
 	{
+		public Estrazione(){ }
+
+		public Estrazione(DateTime ora) {
+			Orario = ora;
+		}
+
 		public DateTime Orario
 		{
 			get; set;
@@ -184,6 +220,16 @@ namespace Enerbank.Model.Test
 
 	public class Accredito : IAccredito
 	{
+		public Accredito(){ }
+
+		public Accredito(decimal importo, int numero, DateTime orario, string descrizione){
+			Descrizione = descrizione;
+			Importo = importo;
+			NumeroTransazioni = numero;
+			Orario = orario;
+
+		}
+
 		public string Descrizione
 		{
 			get; set;
@@ -207,6 +253,14 @@ namespace Enerbank.Model.Test
 
 	public class RisultatoEstrazione : IResultEstrazione
 	{
+		public RisultatoEstrazione() { }
+
+		public RisultatoEstrazione(decimal importo, int numero){
+			ImportoTotale = importo;
+			TransazioniTotale = numero;
+			Data = DateTime.Now;
+		}
+
 		public decimal ImportoTotale
 		{
 			get; set;

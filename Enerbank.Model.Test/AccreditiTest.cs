@@ -38,7 +38,10 @@ namespace Enerbank.Model.Test
 		ModelFactory environment = null;
 
 		public AccreditiTest() {
-			environment = SessionWorker.GetNewEnvironment();
+			environment = DataUtils.GetNewDataEnvironment()
+							.Map<IAccrediti, Accrediti>()
+							.Map<IEstrazioni, Estrazioni>()
+							.Map<IReportEstrazioneAccrediti, ReportEstrazioneAccrediti>(); 
 
 			accrediti = environment.GetNew<IAccrediti>(environment);
 			csvAccreditiFileName = Path.GetTempFileName();
