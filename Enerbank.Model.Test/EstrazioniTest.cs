@@ -18,7 +18,7 @@ namespace Enerbank.Model.Test
 			environment = ModelFactory.Instance
 							.Map<IEstrazioni, Estrazioni>();	
 
-			estrazioni = environment.GetNew<IEstrazioni>();
+			estrazioni = environment.GetNew<IEstrazioni>(environment);
 			
 		}
 

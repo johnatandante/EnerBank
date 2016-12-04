@@ -34,8 +34,9 @@ namespace EnerBank.Model
 		/// </summary>
 		public void Evaluate(List<IAccredito> list) {
 			IResultEstrazione item = Factory.GetNew<IResultEstrazione>();
-			
-			item.Data = list.Select( i=> i.Orario).Single();
+			item.Data = list.Select( i=> i.Orario)
+								.Distinct()
+								.SingleOrDefault();
 			item.ImportoTotale = list.Sum( i => i.Importo);
 			item.TransazioniTotale = list.Sum(i => i.NumeroTransazioni);
 
