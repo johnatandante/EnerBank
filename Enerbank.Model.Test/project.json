@@ -17,7 +17,8 @@
           "version": "1.0.1"
         },
         "EnerBank.Interfaces": "*",
-        "EnerBank.Model": "*"
+        "EnerBank.Model": "*",
+        "Environment.Injector": "1.*"
       },
       "imports": [
         "dotnet5.4",

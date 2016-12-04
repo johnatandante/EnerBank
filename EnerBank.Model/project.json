@@ -4,14 +4,15 @@
     "debugType": "portable"
   },
   "dependencies": {
-    "NETStandard.Library": "1.6.1"
+    "NETStandard.Library": "1.6.1",
+        "EnerBank.Interfaces":"*",
+        "EnerBank.DataItem":"*",
+        "EnerBank.IOUtils":"*",
+        "Environment.Injector" : "1-*"
   },
   "frameworks": {
     "netstandard1.6": {
       "dependencies": {
-        "EnerBank.Interfaces":"*",
-        "EnerBank.DataItem":"*",
-        "EnerBank.IOUtils":"*"
       }
     }
   }

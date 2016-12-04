@@ -1,7 +1,6 @@
-﻿
-using System;
+﻿using System;
 using EnerBank.Interfaces;
-using EnerBank.Model.Services;
+using Environment.Injector;
 
 namespace Enerbank.Model.Test
 {
@@ -152,7 +151,7 @@ namespace Enerbank.Model.Test
 		internal static IResultEstrazione RisultatoEstrazioneItem15_00;
 
 		static DataUtils(){
-			ModelFactory evn = GetNewDataEnvironment();
+			ModelService evn = GetNewDataEnvironment();
 
 			AccreditiCollectionWithSingleOrarioOver12 = new IAccredito[] {
 				evn.GetNew<IAccredito>(1.00M, 1, OrarioOver12, "Orario Over 12")
@@ -172,15 +171,15 @@ namespace Enerbank.Model.Test
 
 		}
 
-		private static ModelFactory Init(ModelFactory env) {
+		private static ModelService Init(ModelService env) {
 			return env.Map<IAccredito, Accredito>()
 				.Map<IEstrazione, Estrazione>()
 				.Map<IResultEstrazione, RisultatoEstrazione>();
 			
 		}
 
-		internal static ModelFactory GetNewDataEnvironment(){
-			return Init((ModelFactory)Activator.CreateInstance(typeof(ModelFactory)));
+		internal static ModelService GetNewDataEnvironment(){
+			return Init((ModelService)Activator.CreateInstance(typeof(ModelService)));
 		}
 
 		internal static string[] FiltroEstrazioniMocked = new string[] {

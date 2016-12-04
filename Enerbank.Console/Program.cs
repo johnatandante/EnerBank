@@ -1,6 +1,7 @@
 ﻿using System.IO;
 using EnerBank.Interfaces;
 using EnerBank.Model.Services;
+using Environment.Injector;
 
 namespace EnerBank.Console
 {
@@ -31,7 +32,7 @@ namespace EnerBank.Console
 			// i riepiloghi giornalieri dei bonifici effettuati in alcune banche, e creare alcuni dati 
 			// a partire da questi.
 
-			ModelFactory environment = SessionWorker.GetNewEnvironment();
+			ModelService environment = SessionWorker.GetNewEnvironment();
 
 			IWorkSession result = environment
 										.GetNew<ISessionWorker>(environment)

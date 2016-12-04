@@ -1,5 +1,6 @@
 ﻿using EnerBank.DataItem;
 using EnerBank.Interfaces;
+using Environment.Injector;
 
 namespace EnerBank.Model.Services
 {
@@ -10,10 +11,10 @@ namespace EnerBank.Model.Services
 
 		IWorkSession session = null;
 		
-		readonly ModelFactory Factory = null;
+		readonly ModelService Factory = null;
 
-		public SessionWorker(ModelFactory environment) {
-			Factory = environment ?? ModelFactory.Instance;
+		public SessionWorker(ModelService environment) {
+			Factory = environment ?? ModelService.Instance;
 			
 		}
 
@@ -36,8 +37,8 @@ namespace EnerBank.Model.Services
 			return session;
 		}
 
-		public static ModelFactory GetNewEnvironment() {
-			ModelFactory environment = new ModelFactory();
+		public static ModelService GetNewEnvironment() {
+			ModelService environment = new ModelService();
 			environment.Map<IAccredito, AccreditoDataItem>()
 				.Map<IEstrazione, EstrazioneDataItem>()
 				.Map<IResultEstrazione, ResultEstrazioneDataItem>()

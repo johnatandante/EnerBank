@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using EnerBank.Interfaces;
 using EnerBank.IOUtils;
-using EnerBank.Model.Services;
+using Environment.Injector;
 
 namespace EnerBank.Model
 {
@@ -20,10 +19,10 @@ namespace EnerBank.Model
 			get { return _Items; }
 		}
 
-		readonly ModelFactory Factory = null;
+		readonly ModelService Factory = null;
 
-		public ReportEstrazioneAccrediti(ModelFactory factory){
-			Factory = factory ?? ModelFactory.Instance;
+		public ReportEstrazioneAccrediti(ModelService factory){
+			Factory = factory ?? ModelService.Instance;
 
 		}
 

@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using EnerBank.Interfaces;
 using EnerBank.Model;
-using EnerBank.Model.Services;
+using Environment.Injector;
 using Xunit;
 
 namespace Enerbank.Model.Test
@@ -17,7 +17,7 @@ namespace Enerbank.Model.Test
 
 
 		IEstrazioni estrazioni = null;
-		ModelFactory environment = null;
+		ModelService environment = null;
 
 		static string csvEstrazioniFileName = string.Empty;
 		static string csvEstrazioniWithSingleOrarioFileName = string.Empty;
@@ -29,11 +29,11 @@ namespace Enerbank.Model.Test
 			estrazioni = environment.GetNew<IEstrazioni>(environment);
 			
 			csvEstrazioniFileName = Path.GetTempFileName();
-			File.WriteAllText(csvEstrazioniFileName, string.Join(Environment.NewLine, csvEstrazioni));
+			File.WriteAllText(csvEstrazioniFileName, string.Join(System.Environment.NewLine, csvEstrazioni));
 			
 			csvEstrazioniWithSingleOrarioFileName = Path.GetTempFileName();
 			File.WriteAllText(csvEstrazioniWithSingleOrarioFileName, 
-				string.Join(Environment.NewLine, csvEstrazioniEstrazioniSingleItem15_00));
+				string.Join(System.Environment.NewLine, csvEstrazioniEstrazioniSingleItem15_00));
 			
 		}
 

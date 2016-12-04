@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using EnerBank.Interfaces;
 using EnerBank.IOUtils;
-using EnerBank.Model.Services;
+using Environment.Injector;
 
 namespace EnerBank.Model
 {
@@ -17,10 +17,10 @@ namespace EnerBank.Model
 			}
 		}
 
-		readonly ModelFactory Factory = null;
+		readonly ModelService Factory = null;
 
-		public Estrazioni(ModelFactory factory){
-			Factory = factory ?? ModelFactory.Instance;
+		public Estrazioni(ModelService factory){
+			Factory = factory ?? ModelService.Instance;
 
 		}
 

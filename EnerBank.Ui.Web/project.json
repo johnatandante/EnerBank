@@ -22,10 +22,10 @@
     "Microsoft.Extensions.Logging.Debug": "1.0.0",
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
-    "EnerBank.DataItem": "1.0.0-*",
     "EnerBank.Interfaces": "1.0.0-*",
     "EnerBank.IOUtils": "1.0.0-*",
-    "EnerBank.Model": "1.0.0-*"
+    "EnerBank.Model": "1.0.0-*",
+    "Environment.Injector": "1.*"
   },
 
   "tools": {

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using EnerBank.Interfaces;
 using EnerBank.IOUtils;
 using EnerBank.Model.Services;
+using Environment.Injector;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -74,7 +75,7 @@ namespace EnerBank.Web.Controllers
 
 				filter = fileInfos[1];
 
-				ModelFactory environment = SessionWorker.GetNewEnvironment();
+				ModelService environment = SessionWorker.GetNewEnvironment();
 				IWorkSession sessionResult = environment
 										.GetNew<ISessionWorker>(environment)
 										.Run(source.FullName, filter.FullName)

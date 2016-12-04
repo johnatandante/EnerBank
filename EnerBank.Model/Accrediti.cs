@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Linq;
 using EnerBank.Interfaces;
 using EnerBank.IOUtils;
-using EnerBank.Model.Services;
+using Environment.Injector;
 
 namespace EnerBank.Model
 {
@@ -20,10 +20,10 @@ namespace EnerBank.Model
 
 		readonly IReportEstrazioneAccrediti report = null;
 
-		readonly ModelFactory Factory = null;
+		readonly ModelService Factory = null;
 
-		public Accrediti(ModelFactory factory){
-			Factory = factory ?? ModelFactory.Instance;
+		public Accrediti(ModelService factory){
+			Factory = factory ?? ModelService.Instance;
 			report = Factory.GetNew<IReportEstrazioneAccrediti>(Factory);
 		}
 
